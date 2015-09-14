@@ -145,7 +145,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //jnpl
-        Teepluss\Theme\ThemeServiceProvider::class
+        Teepluss\Theme\ThemeServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class
 
     ],
 
@@ -196,7 +197,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         //jnpl
-        'Theme'     => Teepluss\Theme\Facades\Theme::class
+        'Theme'     => Teepluss\Theme\Facades\Theme::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class
 
     ],
 
