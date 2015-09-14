@@ -1,0 +1,94 @@
+<?php
+
+namespace App\Http\Controllers\Register;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Traits\AuthRedirectsUsers;
+
+use App\User;
+use App\userData;
+
+use Validator;
+
+class RegisterController extends Controller
+{
+    use AuthRedirectsUsers;
+
+    protected $redirectTo = '/';
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('guest');
+    }
+
+    public function getRegister()
+    {
+        $this->data['name'] = 'Teeplus';
+
+        $this->theme->setDescription('TeeplusDesc');
+        $this->theme->setKeywords('TeeplusKey');
+        $this->theme->set('data', $this->data);
+
+        $this->theme->setTitle('indexTitle');
+
+        return $this->theme->scope('register.register')->render();
+    }
+
+    public function postRegister(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $fData = $this->create($request->all());
+
+        if(!empty($fData)){
+            $userData = new userData;
+            $userData->id = $fData->id;
+            $userData->save();
+        }
+
+        Auth::login($fData);
+        
+        return redirect($this->redirectPath());
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param array $data
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'username' => 'required|alpha_dash|max:255',
+            'email' => 'required|email|max:255|unique:userInfo',
+            'password' => 'required|confirmed|min:6',
+        ]);
+    }
+
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param array $data
+     *
+     * @return User
+     */
+    protected function create(array $data)
+    {
+        return User::create([
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+    }
+}
