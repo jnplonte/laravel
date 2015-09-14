@@ -64,4 +64,8 @@ return [
         'expire' => 60,
     ],
 
+    'defaults' => [
+        'role' => 3
+    ]
+
 ];

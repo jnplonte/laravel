@@ -55,8 +55,9 @@ class RegisterController extends Controller
             $userData->save();
         }
 
-        Auth::login($fData);
-        
+        //remove auto login
+        //Auth::login($fData);
+
         return redirect($this->redirectPath());
     }
 
@@ -85,10 +86,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(empty($data['role'])){
+          $data['role'] = config('auth.defaults.role');
+        }
+
         return User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'role' => $data['role']
         ]);
     }
 }
