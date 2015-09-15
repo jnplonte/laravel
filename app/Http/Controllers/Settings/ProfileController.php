@@ -14,7 +14,7 @@ class ProfileController extends Controller
 
     protected $userTable;
 
-    protected $redirectTo = '/profile';
+    protected $redirectTo = '/profile-settings';
 
     public function __construct()
     {
@@ -39,7 +39,7 @@ class ProfileController extends Controller
 
         $this->theme->set('data', $this->data);
 
-        return $this->theme->scope('setting.profile')->render();
+        return $this->theme->scope('settings.profile')->render();
     }
 
     public function postIndex(Request $request)
