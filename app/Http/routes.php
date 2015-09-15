@@ -34,5 +34,5 @@ Route::get('reset/{token}', array('as' => 'get.reset', 'uses' => 'Register\Forgo
 Route::post('reset', array('as' => 'post.reset', 'uses' => 'Register\ForgotController@postReset'));
 
 //profile
-Route::get('profile', array('as' => 'get.profile', 'uses' => 'Profile\ProfileController@getIndex'));
-Route::post('profile', array('as' => 'post.profile', 'uses' => 'Profile\ProfileController@postIndex'));
+Route::get('profile-settings', array('as' => 'get.profile', 'uses' => 'Settings\ProfileController@getIndex'));
+Route::post('profile-settings', array('as' => 'post.profile', 'uses' => 'Settings\ProfileController@postIndex'));

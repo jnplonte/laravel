@@ -39,7 +39,7 @@ class RegisterController extends Controller
 
     public function postRegister(Request $request)
     {
-        $validator = $this->validator($request->all());
+        $validator = $this->_validator($request->all());
 
         if ($validator->fails()) {
             $this->throwValidationException(
@@ -68,7 +68,7 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function _validator(array $data)
     {
         return Validator::make($data, [
             'username' => 'required|alpha_dash|max:255',

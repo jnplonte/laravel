@@ -14,6 +14,7 @@ class UserData extends Migration
           $table->bigInteger('id');
           $table->string('firstname')->nullable();
           $table->string('lastname')->nullable();
+          $table->string('picture')->nullable();
           $table->string('address')->nullable();
           $table->string('contact_number')->nullable();
           $table->string('birth_date')->nullable();

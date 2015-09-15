@@ -9,7 +9,7 @@
   </div>
 <?php } ?>
 
-<form method="POST" action="/register">
+<form method="POST" action="<?php echo route('post.register'); ?>">
     <?php echo csrf_field(); ?>
 
     <div>

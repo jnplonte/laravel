@@ -1,3 +1,4 @@
+<?php $data = Theme::get('data'); ?>
 <?php if (count($errors) > 0){ ?>
   <div class="alert alert-danger">
     <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -9,10 +10,8 @@
   </div>
 <?php } ?>
 
-<form method="POST" action="/reset">
+<form method="POST" action="<?php echo route('post.reset'); ?>">
     <?php echo csrf_field(); ?>
-    <?php $data = Theme::get('data'); ?>
-
     <input type="hidden" name="token" value="<?php echo $data['token']; ?>">
 
     <div>

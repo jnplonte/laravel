@@ -9,7 +9,7 @@
   </div>
 <?php } ?>
 
-<form method="POST" action="/forgot">
+<form method="POST" action="<?php echo route('post.forgot'); ?>">
     <?php echo csrf_field(); ?>
 
     <div>
