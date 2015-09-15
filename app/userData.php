@@ -8,7 +8,7 @@ class userData extends Model
 {
     protected $table = 'userData';
 
-    protected $fillable = ['firstnamexx', 'lastname', 'picture', 'address', 'contact_number', 'birth_date'];
+    protected $fillable = ['firstname', 'lastname', 'picture', 'address', 'contact_number', 'birth_date'];
 
     protected $id;
 
