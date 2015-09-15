@@ -52,7 +52,7 @@ class ProfileController extends Controller
           );
         }
 
-        $this->_save($request->all());
+        $this->_update($request->all());
 
         return redirect($this->redirectPath())->withInput();
     }
@@ -68,7 +68,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    protected function _save(array $data)
+    protected function _update(array $data)
     {
         $id = $this->data[$this->userTable]['id'];
 
