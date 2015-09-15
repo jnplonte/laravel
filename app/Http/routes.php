@@ -32,3 +32,7 @@ Route::post('forgot', array('as' => 'post.forgot', 'uses' => 'Register\ForgotCon
 //reset
 Route::get('reset/{token}', array('as' => 'get.reset', 'uses' => 'Register\ForgotController@getReset'));
 Route::post('reset', array('as' => 'post.reset', 'uses' => 'Register\ForgotController@postReset'));
+
+//profile
+Route::get('profile', array('as' => 'get.profile', 'uses' => 'Profile\ProfileController@getIndex'));
+Route::post('profile', array('as' => 'post.profile', 'uses' => 'Profile\ProfileController@postIndex'));

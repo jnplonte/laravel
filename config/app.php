@@ -146,7 +146,8 @@ return [
 
         //jnpl
         Teepluss\Theme\ThemeServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class
+        Barryvdh\Debugbar\ServiceProvider::class,
+        App\Providers\HelperServiceProvider::class
 
     ],
 

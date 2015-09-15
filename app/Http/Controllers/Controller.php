@@ -22,7 +22,8 @@ abstract class Controller extends BaseController
         $this->theme = Theme::uses($themeAlias)->layout(env('APP_LAYOUT', 'default'));
 
         if (Auth::user()) {
-            $this->data['user'] = Auth::user();
+            $userTable = config('auth.table');
+            $this->data[$userTable] = Auth::user()->getOriginal();
         }
     }
 }
