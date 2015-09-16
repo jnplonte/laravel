@@ -10,7 +10,7 @@
   </div>
 <?php } ?>
 
-<form method="POST" action="<?php echo route('post.profile'); ?>">
+<form method="POST" action="<?php echo route('post.profile'); ?>" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>
 
     <div>
@@ -21,6 +21,11 @@
     <div>
         lastname
         <input type="text" name="lastname" value="<?php echo _getOldData('lastname', $data['userData']['lastname']); ?>">
+    </div>
+
+    <div>
+        picture
+        <input type="file" name="picture">
     </div>
 
     <div>

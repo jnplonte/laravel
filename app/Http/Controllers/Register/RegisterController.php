@@ -26,7 +26,7 @@ class RegisterController extends Controller
 
     public function getRegister()
     {
-        $this->data['name'] = 'Teeplus';
+        $this->data['name'] = 'register';
 
         $this->theme->setDescription('TeeplusDesc');
         $this->theme->setKeywords('TeeplusKey');
@@ -47,7 +47,7 @@ class RegisterController extends Controller
             );
         }
 
-        $fData = $this->create($request->all());
+        $fData = $this->_create($request->all());
 
         if(!empty($fData)){
             $userData = new userData;
@@ -84,7 +84,7 @@ class RegisterController extends Controller
      *
      * @return User
      */
-    protected function create(array $data)
+    protected function _create(array $data)
     {
         if(empty($data['role'])){
           $data['role'] = config('auth.defaults.role');

@@ -13,7 +13,7 @@ class HomeController extends Controller
 
     public function getIndex()
     {
-        $this->data['name'] = 'Teeplus';
+        $this->data['name'] = 'home';
 
         $this->theme->setDescription('TeeplusDesc');
         $this->theme->setKeywords('TeeplusKey');

@@ -25,7 +25,7 @@ class LoginController extends Controller
      */
     public function getLogin()
     {
-        $this->data['name'] = 'Teeplus';
+        $this->data['name'] = 'login';
 
         $this->theme->setDescription('TeeplusDesc');
         $this->theme->setKeywords('TeeplusKey');
@@ -49,22 +49,22 @@ class LoginController extends Controller
             'email' => 'required|email', 'password' => 'required',
         ]);
 
-        $credentials = $this->getCredentials($request);
+        $credentials = $this->_getCredentials($request);
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            $this->checkRole();
+            $this->_checkRole();
 
             return redirect()->intended($this->redirectPath());
         }
 
-        return redirect($this->loginPath())
+        return redirect($this->_loginPath())
             ->withInput($request->only('email', 'remember'))
             ->withErrors([
-                'email' => $this->getFailedLoginMessage(),
+                'email' => $this->_getFailedLoginMessage(),
             ]);
     }
 
-    protected function checkRole()
+    protected function _checkRole()
     {
         if (Auth::user()) {
             switch (Auth::user()->role) {
@@ -91,7 +91,7 @@ class LoginController extends Controller
      *
      * @return array
      */
-    protected function getCredentials(Request $request)
+    protected function _getCredentials(Request $request)
     {
         return $request->only('email', 'password');
     }
@@ -101,7 +101,7 @@ class LoginController extends Controller
      *
      * @return string
      */
-    protected function getFailedLoginMessage()
+    protected function _getFailedLoginMessage()
     {
         return 'These credentials do not match our records.';
     }
@@ -111,7 +111,7 @@ class LoginController extends Controller
      *
      * @return string
      */
-    public function loginPath()
+    public function _loginPath()
     {
         return property_exists($this, 'loginPath') ? $this->loginPath : '/login';
     }

@@ -147,7 +147,8 @@ return [
         //jnpl
         Teepluss\Theme\ThemeServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        App\Providers\HelperServiceProvider::class
+        App\Providers\HelperServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -199,7 +200,8 @@ return [
 
         //jnpl
         'Theme'     => Teepluss\Theme\Facades\Theme::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'Image'     => Intervention\Image\Facades\Image::class
 
     ],
 

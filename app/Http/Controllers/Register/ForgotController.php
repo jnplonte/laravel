@@ -34,7 +34,7 @@ class ForgotController extends Controller
     */
    public function getForgot()
    {
-       $this->data['name'] = 'Teeplus';
+       $this->data['name'] = 'forgot-password';
 
        $this->theme->setDescription('TeeplusDesc');
        $this->theme->setKeywords('TeeplusKey');
@@ -59,7 +59,7 @@ class ForgotController extends Controller
        //print_r($request->only('email'));
 
        $response = Password::sendResetLink($request->only('email'), function (Message $message) {
-           $message->subject($this->getEmailSubject());
+           $message->subject($this->_getEmailSubject());
        });
 
        switch ($response) {
@@ -76,7 +76,7 @@ class ForgotController extends Controller
     *
     * @return string
     */
-   protected function getEmailSubject()
+   protected function _getEmailSubject()
    {
        return isset($this->emailSubject) ? $this->emailSubject : 'Your Password Reset Link';
    }
@@ -94,7 +94,7 @@ class ForgotController extends Controller
            throw new NotFoundHttpException();
        }
 
-       $this->data['name'] = 'Teeplus';
+       $this->data['name'] = 'reset-password';
        $this->data['token'] = $token;
 
        $this->theme->setDescription('TeeplusDesc');
@@ -126,7 +126,7 @@ class ForgotController extends Controller
        );
 
        $response = Password::reset($credentials, function ($user, $password) {
-           $this->resetPassword($user, $password);
+           $this->_resetPassword($user, $password);
        });
 
        switch ($response) {
@@ -146,7 +146,7 @@ class ForgotController extends Controller
     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
     * @param  string  $password
     */
-   protected function resetPassword($user, $password)
+   protected function _resetPassword($user, $password)
    {
        $user->password = bcrypt($password);
 
