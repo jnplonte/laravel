@@ -15,32 +15,34 @@
 
     <div>
         firstname
-        <input type="text" name="firstname" value="<?php echo _getOldData('firstname', $data['userData']['firstname']); ?>">
+        <input type="text" name="firstname" value="<?php echo _getOldData('firstname', $data['userData']['firstname']); ?>" />
     </div>
 
     <div>
         lastname
-        <input type="text" name="lastname" value="<?php echo _getOldData('lastname', $data['userData']['lastname']); ?>">
+        <input type="text" name="lastname" value="<?php echo _getOldData('lastname', $data['userData']['lastname']); ?>" />
     </div>
 
     <div>
         picture
-        <input type="file" name="picture">
+        <input type="file" name="picture" />
+        <img class="s-p-old-img" src="<?php echo _checkPicture($data['userData']['gender'], $data['userData']['picture']); ?>" alt="" title="" width="150" height="150" />
+        <input type="hidden" name="old_picture" value="<?php echo $data['userData']['picture']; ?>" />
     </div>
 
     <div>
         address
-        <input type="text" name="address" value="<?php echo _getOldData('address', $data['userData']['address']); ?>">
+        <input type="text" name="address" value="<?php echo _getOldData('address', $data['userData']['address']); ?>" />
     </div>
 
     <div>
         contact_number
-        <input type="text" name="contact_number" value="<?php echo _getOldData('contact_number', $data['userData']['contact_number']); ?>">
+        <input type="text" name="contact_number" value="<?php echo _getOldData('contact_number', $data['userData']['contact_number']); ?>" />
     </div>
 
     <div>
         birth_date
-        <input type="text" name="birth_date" value="<?php echo _getOldData('birth_date', $data['userData']['birth_date']); ?>">
+        <input type="text" name="birth_date" value="<?php echo _getOldData('birth_date', $data['userData']['birth_date']); ?>" />
     </div>
 
     <div>

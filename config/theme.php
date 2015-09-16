@@ -47,6 +47,8 @@ return array(
 	|
 	*/
 
-	'themeDir' => 'themes'
+	'themeDir' => 'themes',
 
+
+	'themeAssetsDir' => env('APP_URL').'/themes/'.env('APP_THEME', 'default').'/assets'
 );

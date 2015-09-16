@@ -10,6 +10,7 @@ use App\userData;
 use Input;
 use Image;
 use Validator;
+use File;
 
 class ProfileController extends Controller
 {
@@ -59,7 +60,7 @@ class ProfileController extends Controller
         }
 
         //img upload
-        $req_data['picture'] = $this->_uploadPicture(Input::file('picture'));
+        $req_data['picture'] = $this->_uploadPicture(Input::file('picture'), $req_data['old_picture']);
 
         //save file
         $this->_update($req_data);
@@ -83,19 +84,24 @@ class ProfileController extends Controller
     {
         $id = $this->data[$this->userTable]['id'];
 
-        //remove token
+        //remove unused info
         unset($data['_token']); unset($data['old_picture']);
 
         $userData = new userData();
         $userData::where('id', $id)->update($data);
     }
 
-    protected function _uploadPicture($file)
+    protected function _uploadPicture($file, $old_file)
     {
       $img = Image::make($file);
       $fname = env('UPLOAD_PATH', 'uploads').'/'._randomString(20).'.jpg';
-      $img->resize(300, 300)->save($fname);
-
-      return $fname;
+      if($img->resize(300, 300)->save($fname)){
+        if(!empty($old_file)){
+          File::delete($old_file);
+        }
+        return $fname;
+      }else{
+        return null;
+      }
     }
 }
