@@ -49,9 +49,13 @@ class ProfileController extends Controller
     public function postIndex(Request $request)
     {
         $req_data = $request->all();
-        $req_data['picture'] = Input::file('picture');
+        $hasImg = false;
+        if(!empty($req_data['picture'])){
+          $req_data['picture'] = Input::file('picture');
+          $hasImg = true;
+        }
 
-        $validator = $this->_validator($req_data);
+        $validator = $this->_validator($req_data, $hasImg);
 
         if ($validator->fails()) {
             $this->throwValidationException(
@@ -60,7 +64,11 @@ class ProfileController extends Controller
         }
 
         //img upload
-        $req_data['picture'] = $this->_uploadPicture(Input::file('picture'), $req_data['old_picture']);
+        if(!empty($req_data['picture'])){
+          $req_data['picture'] = $this->_uploadPicture(Input::file('picture'), $req_data['old_picture']);
+        }else{
+          unset($req_data['picture']);
+        }
 
         //save file
         $this->_update($req_data);
@@ -68,16 +76,21 @@ class ProfileController extends Controller
         return redirect($this->redirectPath())->withInput();
     }
 
-    protected function _validator(array $data)
+    protected function _validator(array $data, $hasImg)
     {
-        return Validator::make($data, [
-            'firstname' => 'required|alpha|max:255',
-            'lastname' => 'required|alpha|max:255',
-            'picture' => 'image',
+        $vData = array(
+            'firstname' => 'required|max:255',
+            'lastname' => 'required|max:255',
             'address' => '',
             'contact_number' => 'integer',
-            'birth_date' => '',
-        ]);
+            'birth_date' => ''
+        );
+
+        if(!empty($hasImg)){
+          $vData['picture'] = 'image';
+        }
+
+        return Validator::make($data, $vData);
     }
 
     protected function _update(array $data)

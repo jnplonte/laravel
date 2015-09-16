@@ -18,6 +18,7 @@ class UserData extends Migration
           $table->string('address')->nullable();
           $table->string('contact_number')->nullable();
           $table->string('birth_date')->nullable();
+          $table->tinyInteger('gender')->nullable();
           $table->timestamps();
       });
     }

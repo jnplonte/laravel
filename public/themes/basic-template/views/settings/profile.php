@@ -46,6 +46,24 @@
     </div>
 
     <div>
+        gender
+        <select name="gender">
+          <option value="" style="display:none;"></option>
+          <?php $gValue = array(
+              array('value' => '1', 'name' => 'Male'),
+              array('value' => '2', 'name' => 'Female')
+          ); ?>
+          <?php foreach ($gValue as $key => $val) { ?>
+            <?php $gSelected = '';
+            if($data['userData']['gender'] == $val['value']){
+              $gSelected = 'selected="selected"';
+            } ?>
+            <option value="<?php echo $val['value']; ?>" <?php echo $gSelected; ?>><?php echo $val['name']; ?></option>
+          <?php } ?>
+        </select>
+    </div>
+
+    <div>
         <button type="submit">Update</button>
     </div>
 </form>
