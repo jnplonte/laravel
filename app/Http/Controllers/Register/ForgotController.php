@@ -21,6 +21,10 @@ class ForgotController extends Controller
 
     protected $redirectTo = '/';
 
+    protected $forgotSuccessMessage = 'Forgot Sucess';
+
+    protected $resetSuccessMessage = 'Reset Sucess';
+
     public function __construct()
     {
         parent::__construct();
@@ -64,7 +68,7 @@ class ForgotController extends Controller
 
        switch ($response) {
            case Password::RESET_LINK_SENT:
-               return redirect()->back()->with('status', trans($response));
+               return redirect()->back()->with('message', $this->forgotSuccessMessage);
 
            case Password::INVALID_USER:
                return redirect()->back()->withErrors(['email' => trans($response)]);
@@ -131,7 +135,7 @@ class ForgotController extends Controller
 
        switch ($response) {
            case Password::PASSWORD_RESET:
-               return redirect($this->redirectPath());
+               return redirect($this->redirectPath())->with('message', $this->resetSuccessMessage);;
 
            default:
                return redirect()->back()
@@ -152,7 +156,8 @@ class ForgotController extends Controller
 
        $user->save();
 
-       Auth::login($user);
+       //remove auto login
+       //Auth::login($user);
    }
 
 }

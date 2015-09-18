@@ -18,6 +18,8 @@ class RegisterController extends Controller
 
     protected $redirectTo = '/';
 
+    protected $successMessage = 'Register Sucess';
+
     public function __construct()
     {
         parent::__construct();
@@ -58,7 +60,7 @@ class RegisterController extends Controller
         //remove auto login
         //Auth::login($fData);
 
-        return redirect($this->redirectPath());
+        return redirect($this->redirectPath())->with('message', $this->successMessage);
     }
 
     /**

@@ -23,6 +23,7 @@
       </div>
 
       <div class="content">
+          <?php echo Theme::partialWithLayout('alertbox'); ?>
           <?php echo Theme::content(); ?>
       </div>
 

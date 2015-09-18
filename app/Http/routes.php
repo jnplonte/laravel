@@ -36,3 +36,7 @@ Route::post('reset', array('as' => 'post.reset', 'uses' => 'Register\ForgotContr
 //profile
 Route::get('settings/profile', array('as' => 'get.profile', 'uses' => 'Settings\ProfileController@getIndex'));
 Route::post('settings/profile', array('as' => 'post.profile', 'uses' => 'Settings\ProfileController@postIndex'));
+
+//account
+Route::get('settings/account', array('as' => 'get.account', 'uses' => 'Settings\AccountController@getIndex'));
+Route::post('settings/account', array('as' => 'post.account', 'uses' => 'Settings\AccountController@postIndex'));

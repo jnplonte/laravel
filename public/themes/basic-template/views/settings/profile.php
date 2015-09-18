@@ -1,18 +1,7 @@
 <?php $data = Theme::get('data'); ?>
-<?php if (count($errors) > 0){ ?>
-  <div class="alert alert-danger">
-    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-    <ul>
-      <?php foreach ($errors->all() as $key => $value) { ?>
-         <li><?php echo $value; ?></li>
-      <?php } ?>
-    </ul>
-  </div>
-<?php } ?>
-
 <form method="POST" action="<?php echo route('post.profile'); ?>" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>
-
+    
     <div>
         firstname
         <input type="text" name="firstname" value="<?php echo _getOldData('firstname', $data['userData']['firstname']); ?>" />

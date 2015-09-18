@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\AuthRedirectsUsers;
+
 use App\userData;
 
 use Input;
@@ -19,6 +20,8 @@ class ProfileController extends Controller
     protected $userTable;
 
     protected $redirectTo = '/settings/profile';
+
+    protected $successMessage = 'Update Profile Sucess';
 
     public function __construct()
     {
@@ -73,7 +76,7 @@ class ProfileController extends Controller
         //save file
         $this->_update($req_data);
 
-        return redirect($this->redirectPath())->withInput();
+        return redirect($this->redirectPath())->with('message', $this->successMessage);
     }
 
     protected function _validator(array $data, $hasImg)
