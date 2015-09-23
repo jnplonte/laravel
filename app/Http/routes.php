@@ -40,3 +40,7 @@ Route::post('settings/profile', array('as' => 'post.profile', 'uses' => 'Setting
 //account
 Route::get('settings/account', array('as' => 'get.account', 'uses' => 'Settings\AccountController@getIndex'));
 Route::post('settings/account', array('as' => 'post.account', 'uses' => 'Settings\AccountController@postIndex'));
+
+//password
+Route::get('settings/password', array('as' => 'get.password', 'uses' => 'Settings\PasswordController@getIndex'));
+Route::post('settings/password', array('as' => 'post.password', 'uses' => 'Settings\PasswordController@postIndex'));

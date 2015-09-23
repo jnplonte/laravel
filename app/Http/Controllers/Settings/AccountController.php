@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\AuthRedirectsUsers;
+use App\Traits\MatchOldData;
 
 use App\User;
 
@@ -13,6 +14,7 @@ use Validator;
 class AccountController extends Controller
 {
     use AuthRedirectsUsers;
+    use MatchOldData;
 
     protected $userTable;
 
@@ -30,16 +32,13 @@ class AccountController extends Controller
 
     public function getIndex()
     {
-        $this->data['pageName'] = 'profile-settings';
+        $this->data['pageName'] = 'account-settings';
 
-        $this->theme->setDescription($this->data[$this->userTable]['username'].' Profile');
+        $this->theme->setDescription($this->data[$this->userTable]['username'].' Account');
         $this->theme->setKeywords('');
-        $this->theme->setTitle($this->data[$this->userTable]['username'].' Profile');
+        $this->theme->setTitle($this->data[$this->userTable]['username'].' Account');
 
         $id = $this->data[$this->userTable]['id'];
-
-        //$userData = new userData();
-        //$this->data['userData'] = $userData::find($id)->getOriginal();
 
         $this->theme->set('data', $this->data);
 
@@ -48,59 +47,63 @@ class AccountController extends Controller
 
     public function postIndex(Request $request)
     {
-        // $req_data = $request->all();
-        // $hasImg = false;
-        // if(!empty($req_data['picture'])){
-        //   $req_data['picture'] = Input::file('picture');
-        //   $hasImg = true;
-        // }
-        //
-        // $validator = $this->_validator($req_data, $hasImg);
-        //
-        // if ($validator->fails()) {
-        //     $this->throwValidationException(
-        //       $request, $validator
-        //   );
-        // }
-        //
-        // //img upload
-        // if(!empty($req_data['picture'])){
-        //   $req_data['picture'] = $this->_uploadPicture(Input::file('picture'), $req_data['old_picture']);
-        // }else{
-        //   unset($req_data['picture']);
-        // }
-        //
-        // //save file
-        // $this->_update($req_data);
-        //
-        // return redirect($this->redirectPath())->with('message', $this->successMessage);
+        $req_data = $request->all();
+
+        if($this->matchData($req_data, 'username') == false){
+          $validator = $this->_validator($req_data, 'username');
+          if ($validator->fails()) {
+              $this->throwValidationException(
+                $request, $validator
+            );
+          }
+
+          $this->_update($req_data, 'username');
+        }
+
+        if($this->matchData($req_data, 'email') == false){
+          $validator = $this->_validator($req_data, 'email');
+          if ($validator->fails()) {
+              $this->throwValidationException(
+                $request, $validator
+            );
+          }
+
+          $this->_update($req_data, 'email');
+        }
+
+        return redirect($this->redirectPath())->with('message', $this->successMessage);
     }
 
-    protected function _validator(array $data, $hasImg)
+    protected function _validator(array $data, $param)
     {
-        // $vData = array(
-        //     'firstname' => 'required|max:255',
-        //     'lastname' => 'required|max:255',
-        //     'address' => '',
-        //     'contact_number' => 'integer',
-        //     'birth_date' => ''
-        // );
-        //
-        // if(!empty($hasImg)){
-        //   $vData['picture'] = 'image';
-        // }
-        //
-        // return Validator::make($data, $vData);
+        $vData = array();
+
+        if($param == 'username'){
+          $vData = array(
+            'username' => 'required|alpha_dash|max:255|unique:userInfo'
+          );
+        }
+
+        if($param == 'email'){
+          $vData = array(
+            'email' => 'required|email|max:255|unique:userInfo'
+          );
+        }
+
+        return Validator::make($data, $vData);
     }
 
-    protected function _update(array $data)
+    protected function _update(array $data, $param)
     {
-    //     $id = $this->data[$this->userTable]['id'];
-    //
-    //     //remove unused info
-    //     unset($data['_token']); unset($data['old_picture']);
-    //
-    //     $userData = new userData();
-    //     $userData::where('id', $id)->update($data);
+        $id = $this->data[$this->userTable]['id'];
+
+        $vData = array();
+
+        if(!empty($data[$param])){
+          $vData[$param] = $data[$param];
+        }
+
+        $userInfo = new User();
+        $userInfo::where('id', $id)->update($vData);
     }
 }

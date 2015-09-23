@@ -26,4 +26,5 @@ abstract class Controller extends BaseController
             $this->data[$userTable] = Auth::user()->getOriginal();
         }
     }
+
 }

@@ -148,7 +148,10 @@ return [
         Teepluss\Theme\ThemeServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+
+
+        App\Providers\CustomValidationServiceProvider::class //--> jnpl test
 
     ],
 
