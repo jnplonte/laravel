@@ -12,6 +12,6 @@ class testFacades
   }
 
   public function test() {
-      echo 'testx';
+      echo 'test';
   }
 }

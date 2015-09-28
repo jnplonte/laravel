@@ -75,7 +75,7 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'url'                  => 'The :attribute format is invalid.',
 
-    'check_validation' => 'Test :attribute.',
+    'check_old_password' => 'The :attribute is invalid.',
 
     /*
     |--------------------------------------------------------------------------

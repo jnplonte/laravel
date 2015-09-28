@@ -45,63 +45,40 @@ class PasswordController extends Controller
 
     public function postIndex(Request $request)
     {
-        // $req_data = $request->all();
-        //
-        // if($this->_matchOldData($req_data, 'username') == false){
-        //   $validator = $this->_validator($req_data, 'username');
-        //   if ($validator->fails()) {
-        //       $this->throwValidationException(
-        //         $request, $validator
-        //     );
-        //   }
-        //
-        //   $this->_update($req_data, 'username');
-        // }
-        //
-        // if($this->_matchOldData($req_data, 'email') == false){
-        //   $validator = $this->_validator($req_data, 'email');
-        //   if ($validator->fails()) {
-        //       $this->throwValidationException(
-        //         $request, $validator
-        //     );
-        //   }
-        //
-        //   $this->_update($req_data, 'email');
-        // }
-        //
+        $req_data = $request->all();
+
+        $validator = $this->_validator($req_data);
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+              $request, $validator
+          );
+        }
+
+        //update data
+        $this->_update($req_data);
+
         return redirect($this->redirectPath())->with('message', $this->successMessage);
     }
 
-    protected function _validator(array $data, $param)
+    protected function _validator(array $data)
     {
-        // $vData = array();
-        //
-        // if($param == 'username'){
-        //   $vData = array(
-        //     'username' => 'required|alpha_dash|max:255|unique:userInfo'
-        //   );
-        // }
-        //
-        // if($param == 'email'){
-        //   $vData = array(
-        //     'email' => 'required|email|max:255|unique:userInfo'
-        //   );
-        // }
-        //
-        // return Validator::make($data, $vData);
+      return Validator::make($data, [
+          'password' => 'required|min:6|check_old_password',
+          'new_password' => 'required|confirmed|min:6',
+      ]);
     }
 
-    protected function _update(array $data, $param)
+    protected function _update(array $data)
     {
-        // $id = $this->data[$this->userTable]['id'];
-        //
-        // $vData = array();
-        //
-        // if(!empty($data[$param])){
-        //   $vData[$param] = $data[$param];
-        // }
-        //
-        // $userInfo = new User();
-        // $userInfo::where('id', $id)->update($vData);
+      $id = $this->data[$this->userTable]['id'];
+
+      $vData = array();
+
+      //remove unused info
+      $vData['password'] = bcrypt($data['new_password']);
+
+      $userInfo = new User();
+      $userInfo::where('id', $id)->update($vData);
     }
 }
