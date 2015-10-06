@@ -36,12 +36,11 @@ class Authenticate
     {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
-                return response('Unauthorized.', 401);
+                return \Response::view('error.401');
             } else {
-                return response('Page Not Found.', 404);
+                return \Response::view('error.404');
             }
         }
-
         return $next($request);
     }
 }

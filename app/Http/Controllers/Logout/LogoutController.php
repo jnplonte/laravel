@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class LogoutController extends Controller
 {
+    protected $successMessage = 'Log-out Sucess';
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -23,6 +25,6 @@ class LogoutController extends Controller
         Auth::logout();
 
         return redirect(property_exists($this, 'redirectAfterLogout') ?
-        $this->redirectAfterLogout : '/');
+        $this->redirectAfterLogout : '/')->with('message', $this->successMessage);
     }
 }

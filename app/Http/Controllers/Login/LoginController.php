@@ -13,6 +13,8 @@ class LoginController extends Controller
 
     protected $redirectTo = '/';
 
+    protected $successMessage = 'Log-in Sucess';
+
     public function __construct()
     {
         parent::__construct();
@@ -51,10 +53,11 @@ class LoginController extends Controller
 
         $credentials = $this->_getCredentials($request);
 
+        $credentials['active'] = 1;
+
         if (Auth::attempt($credentials, $request->has('remember'))) {
             $this->_checkRole();
-
-            return redirect()->intended($this->redirectPath());
+            return redirect()->intended($this->redirectPath())->with('message', $this->successMessage);
         }
 
         return redirect($this->_loginPath())

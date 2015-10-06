@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#" lang="" class="ie8"> <![endif]-->
+<!--[if IE 8]><html xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#" lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#" lang="" class="">
+<html xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#" lang="en" class="no-js">
 <!--<![endif]-->
   <head>
       <title><?php echo Theme::get('title'); ?></title>
@@ -13,10 +13,8 @@
       <![endif]-->
 
       <?php echo Theme::asset()->styles(); ?>
-      <?php echo Theme::asset()->container('layout-css')->styles(); ?>
   </head>
   <body>
-
       <div class="header">
         <?php echo Theme::partialWithLayout('header'); ?>
         <?php echo Theme::partialWithLayout('menu'); ?>
@@ -33,7 +31,6 @@
       </div>
 
       <?php echo Theme::asset()->scripts(); ?>
-      <?php echo Theme::asset()->container('layout-js')->scripts(); ?>
 
       <!--[if lt IE 9]>
           <script src="http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>

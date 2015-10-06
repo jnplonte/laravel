@@ -44,3 +44,11 @@ Route::post('settings/account', array('as' => 'post.account', 'uses' => 'Setting
 //password
 Route::get('settings/password', array('as' => 'get.password', 'uses' => 'Settings\PasswordController@getIndex'));
 Route::post('settings/password', array('as' => 'post.password', 'uses' => 'Settings\PasswordController@postIndex'));
+
+//admin
+Route::get('admin', array('as' => 'admin', 'uses' => 'Admin\AdminController@getIndex'));
+
+//users
+Route::get('users', array('as' => 'users', 'uses' => 'Admin\UserController@getUsers'));
+Route::get('user/{id}', array('as' => 'get.user', 'uses' => 'Admin\UserController@getUser'));
+Route::post('user/{id}', array('as' => 'post.user', 'uses' => 'Admin\UserController@postUser'));

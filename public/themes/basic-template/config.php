@@ -58,11 +58,25 @@ return array(
           /*
            * CSS
            */
-          $theme->asset()->usePath()->add('css', 'css/style.css');
+          $theme->asset()->add('foundation', 'libraries/foundation/css/foundation.min.css');
+          $theme->asset()->add('normalize', 'libraries/foundation/css/normalize.css');
+          $theme->asset()->add('foundation-icons', 'libraries/foundation-icons/foundation-icons.css');
 
           /*
            * JS
            */
+          $theme->asset()->add('modernizr', 'libraries/foundation/js/vendor/modernizr.js');
+          $theme->asset()->add('jquery', 'libraries/foundation/js/vendor/jquery.js');
+          $theme->asset()->add('fastclick', 'libraries/foundation/js/vendor/fastclick.js');
+          $theme->asset()->add('foundation', 'libraries/foundation/js/foundation.min.js');
+
+          $actionName = str_replace('@', '', strstr(Route::getCurrentRoute()->getActionName(), '@'));
+          if (in_array($actionName, array("getUsers"))) {
+              $theme->asset()->add('responsive-tables', 'libraries/responsive-tables/responsive-tables.css');
+              $theme->asset()->add('responsive-tables', 'libraries/responsive-tables/responsive-tables.js');
+          }
+
+          $theme->asset()->usePath()->add('css', 'css/style.css');
           $theme->asset()->usePath()->add('js', 'js/script.js');
         },
 

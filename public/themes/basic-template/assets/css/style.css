@@ -1,0 +1,20 @@
+.bold{
+  font-weight: bold;
+}
+
+.center-text{
+  text-align: center;
+}
+
+.black{
+  color: #222 !important;
+}
+
+.table-active{
+  background-color: #e7e7e7;
+}
+
+.responsive th, .responsive td{
+  white-space: nowrap;
+  width: 20%;
+}
