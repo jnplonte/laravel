@@ -58,8 +58,8 @@ return array(
           /*
            * CSS
            */
-          $theme->asset()->add('foundation', 'libraries/foundation/css/foundation.min.css');
           $theme->asset()->add('normalize', 'libraries/foundation/css/normalize.css');
+          $theme->asset()->add('foundation', 'libraries/foundation/css/foundation.min.css');
           $theme->asset()->add('foundation-icons', 'libraries/foundation-icons/foundation-icons.css');
 
           /*

@@ -18,3 +18,14 @@
   white-space: nowrap;
   width: 20%;
 }
+
+.margin-bot{
+  margin-bottom: 1rem;
+}
+
+
+@media only screen and (max-width: 40em) {
+  .margin-top-img{
+    margin-top: 2rem;
+  }
+}

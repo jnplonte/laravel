@@ -46,7 +46,23 @@ class userData extends Model
           ->orWhere($this->table.'.firstname', 'like', '%'.$search.'%')
           ->orWhere($this->table.'.lastname', 'like', '%'.$search.'%')
           ->orderBy($this->type, $this->sort)
+          
           ->paginate($this->page);
+
+      return $users;
+    }
+
+    public function getUser($id = null){
+
+      $users = DB::table($this->userInfoTable)
+
+          ->join($this->table, $this->userInfoTable.'.id', '=', $this->table.'.id')
+
+          ->select($this->table.'.*', $this->userInfoTable.'.username', $this->userInfoTable.'.email', $this->userInfoTable.'.role', $this->userInfoTable.'.active')
+
+          ->where($this->userInfoTable.'.id', $id)
+
+          ->first();
 
       return $users;
     }

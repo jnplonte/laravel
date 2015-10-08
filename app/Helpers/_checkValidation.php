@@ -47,3 +47,17 @@ function _checkRole($role){
     break;
   }
 }
+
+function _checkGender($gender){
+  switch ($gender) {
+    case '1':
+      return 'Male';
+    break;
+    case '2':
+      return 'Female';
+    break;
+    default:
+      return 'Male';
+    break;
+  }
+}
