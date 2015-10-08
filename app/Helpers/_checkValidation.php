@@ -61,3 +61,11 @@ function _checkGender($gender){
     break;
   }
 }
+
+function _checkCheckBox($chk){
+  if($chk == 1){
+    return 'checked="checked"';
+  }else{
+    return '';
+  }
+}

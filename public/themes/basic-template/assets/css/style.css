@@ -23,6 +23,24 @@
   margin-bottom: 1rem;
 }
 
+.alert-box-container{
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  min-width: 300px;
+  z-index: 100;
+}
+
+.alert-box-container ul{
+  list-style-type: none;
+  margin: 0px;
+  font-size: 1em;
+}
+
+.alert-box-container .alert-box .close{
+  top: 20px;
+}
 
 @media only screen and (max-width: 40em) {
   .margin-top-img{

@@ -38,8 +38,6 @@ class AccountController extends Controller
         $this->theme->setKeywords('');
         $this->theme->setTitle($this->data[$this->userTable]['username'].' Account');
 
-        $id = $this->data[$this->userTable]['id'];
-
         $this->theme->set('data', $this->data);
 
         return $this->theme->scope('settings.account')->render();
@@ -71,6 +69,14 @@ class AccountController extends Controller
           $this->_update($req_data, 'email');
         }
 
+        //active
+        if(empty($req_data['active'])){
+          $req_data['active'] = 0;
+        }else{
+          $req_data['active'] = 1;
+        }
+        $this->_update($req_data, 'active');
+
         return redirect($this->redirectPath())->with('message', $this->successMessage);
     }
 
@@ -95,13 +101,9 @@ class AccountController extends Controller
 
     protected function _update(array $data, $param)
     {
-        $id = $this->data[$this->userTable]['id'];
-
         $vData = array();
-
-        if(!empty($data[$param])){
-          $vData[$param] = $data[$param];
-        }
+        $id = $this->data[$this->userTable]['id'];
+        $vData[$param] = $data[$param];
 
         $userInfo = new User();
         $userInfo::where('id', $id)->update($vData);
