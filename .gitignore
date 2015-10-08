@@ -1,4 +1,7 @@
 /vendor
 /node_modules
+/bower_components
+/public/libraries/bower_components
+/public/uploads
 Homestead.yaml
 .env

@@ -1,0 +1,21 @@
+{
+  "name": "test laravel",
+  "version": "1.0.0",
+  "homepage": "https://github.com/jnplonte/laravel",
+  "authors": [
+    "jnpl-nova <johnpaul@novafabrik.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vandor"
+  ],
+  "dependencies": {
+    "foundation-datepicker": "~1.4.0"
+  },
+  "devDependencies": {
+    "foundation-datepicker": "~1.4.0"
+  }
+}

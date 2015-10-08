@@ -64,7 +64,7 @@ class PasswordController extends Controller
     protected function _validator(array $data)
     {
       return Validator::make($data, [
-          'password' => 'required|min:6|check_old_password',
+          'password' => 'required|check_old_password',
           'new_password' => 'required|confirmed|min:6',
       ]);
     }
