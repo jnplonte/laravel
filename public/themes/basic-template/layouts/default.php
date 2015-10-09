@@ -6,9 +6,13 @@
   <head>
       <title><?php echo Theme::get('title'); ?></title>
       <!-- Meta template -->
-      <?php echo Theme::partialWithLayout('meta'); ?>
+      <?php echo Theme::partial('meta'); ?>
 
-      <?php echo Theme::asset()->styles(); ?>
+      <?php
+        echo Theme::asset()->container('base-css')->styles();
+        echo Theme::asset()->styles();
+        echo Theme::asset()->container('theme-css')->styles();
+      ?>
   </head>
   <body>
       <div class="header">
@@ -26,6 +30,10 @@
           <?php echo Theme::partialWithLayout('footer'); ?>
       </div>
 
-      <?php echo Theme::asset()->scripts(); ?>
+      <?php
+        echo Theme::asset()->container('base-js')->scripts();
+        echo Theme::asset()->scripts();
+        echo Theme::asset()->container('theme-js')->scripts();
+      ?>
   </body>
 </html>
