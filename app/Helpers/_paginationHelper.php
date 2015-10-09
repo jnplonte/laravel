@@ -38,7 +38,7 @@ function _getUserPagination($usersData, $getData){
     if( ($z1 <= $i) && ($i <= $z2)){
       $page = _getUserPaginationURL($usersData->url($i), $getData);
       if($usersData->currentPage() == $i){
-        $content .= '<li class="current"><a href="javascript:void:(0);">'.$i.'</a></li>';
+        $content .= '<li class="current"><a href="javascript:void(0);">'.$i.'</a></li>';
       }else{
         $content .= '<li><a href="'.$page['pageURL'].'">'.$i.'</a></li>';
       }
@@ -46,7 +46,7 @@ function _getUserPagination($usersData, $getData){
   }
 
   if($usersData->currentPage() <= ($usersData->lastPage() - config('site.paginationHeillip'))){
-    $content .= '<li class="unavailable"><a href="javascript:void:(0);">&hellip;</a></li>';
+    $content .= '<li class="unavailable"><a href="javascript:void(0);">&hellip;</a></li>';
   }
 
   if($usersData->currentPage() <= ($usersData->lastPage() - config('site.paginationLast'))){

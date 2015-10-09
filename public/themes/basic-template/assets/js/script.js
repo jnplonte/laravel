@@ -16,4 +16,8 @@ $(document).ready(function() {
       return (css.match (/(^|\s)fa-\S+/g) || []).join(' ');
     });
   }
+
+  lazyLoading.init({
+    selector : 'img.lazy'
+  });
 });

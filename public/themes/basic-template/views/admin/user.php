@@ -27,7 +27,7 @@
             </div>
             <div class="large-4 medium-4 small-6 columns">
               <label class="th margin-top-img">
-                <img src="<?php echo _checkPicture($data['userData']->gender, $data['userData']->picture); ?>" alt="" title="" width="300" height="300" />
+                <img data-src="<?php echo _checkPicture($data['userData']->gender, $data['userData']->picture); ?>" src="<?php echo url(config('theme.themeAssetsDir').'/img/blank_img.png'); ?>" class="lazy" alt="" title="" width="300" height="300" />
               </label>
             </div>
           </div>

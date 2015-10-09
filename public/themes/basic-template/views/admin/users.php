@@ -34,20 +34,28 @@
                 <th>ROLE</th>
                 <th></th>
              </tr>
-             <?php foreach ($data['usersData'] as $key => $value) { ?>
-               <tr>
-                 <td class="table-<?php echo _checkTableClass($data['getData'], 'username'); ?>"><?php echo $value->username; ?></td>
-                 <td class="table-<?php echo _checkTableClass($data['getData'], 'firstname'); ?>"><?php echo $value->firstname.' '.$value->lastname; ?></td>
-                 <td class="table-<?php echo _checkTableClass($data['getData'], 'email'); ?>"><?php echo $value->email; ?></td>
-                 <td><?php echo _checkActive($value->active); ?></td>
-                 <td><?php echo _checkRole($value->role); ?></td>
-                 <td><a href="<?php echo route('get.user', $value->id); ?>" class="label secondary">EDIT</a></td>
-               </tr>
+             <?php if(!empty($data['usersData']->items())){ ?>
+               <?php foreach ($data['usersData']->items() as $key => $value) { ?>
+                 <tr>
+                   <td class="table-<?php echo _checkTableClass($data['getData'], 'username'); ?>"><?php echo $value->username; ?></td>
+                   <td class="table-<?php echo _checkTableClass($data['getData'], 'firstname'); ?>"><?php echo $value->firstname.' '.$value->lastname; ?></td>
+                   <td class="table-<?php echo _checkTableClass($data['getData'], 'email'); ?>"><?php echo $value->email; ?></td>
+                   <td><?php echo _checkActive($value->active); ?></td>
+                   <td><?php echo _checkRole($value->role); ?></td>
+                   <td><a href="<?php echo route('get.user', $value->id); ?>" class="label secondary">EDIT</a></td>
+                 </tr>
+               <?php } ?>
+             <?php }else{ ?>
+                 <tr>
+                   <td colspan="6" class="center-text"><span class="bold">NO RESULTS FOUND</span></td>
+                 </tr>
              <?php } ?>
            </tbody>
          </table>
          <div class="pagination-centered">
-          <?php echo _getUserPagination($data['usersData'], $data['getData']); ?>
+          <?php if(!empty($data['usersData']->items())){ ?>
+            <?php echo _getUserPagination($data['usersData'], $data['getData']); ?>
+          <?php } ?>
         </div>
        </div>
      </div>

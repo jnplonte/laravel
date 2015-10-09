@@ -70,6 +70,7 @@ return array(
           $theme->asset()->add('jquery', 'libraries/foundation/js/vendor/jquery.js');
           $theme->asset()->add('fastclick', 'libraries/foundation/js/vendor/fastclick.js');
           $theme->asset()->add('base-helper', 'libraries/helpers/base-helper.js');
+          $theme->asset()->add('base-libraries', 'libraries/helpers/base-libraries.js');
           $theme->asset()->add('foundation', 'libraries/foundation/js/foundation.min.js');
           $theme->asset()->add('foundation-datepicker', 'libraries/bower_components/foundation-datepicker/js/foundation-datepicker.min.js');
 
