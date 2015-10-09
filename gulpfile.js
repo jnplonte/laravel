@@ -11,6 +11,17 @@ var elixir = require('laravel-elixir');
  |
  */
 
+ elixir.config.production = true;
+ elixir.config.sourcemaps = false;
+
 elixir(function(mix) {
-    mix.sass('app.scss');
+    mix.styles([
+        "css/*.css",
+        "css/**/*.css"
+    ], 'public/assets/default.css', 'public/themes/basic-template/assets/');
+
+    mix.scripts([
+        "js/*.js",
+        "js/**/*.js"
+    ], 'public/assets/default.js', 'public/themes/basic-template/assets/');
 });
