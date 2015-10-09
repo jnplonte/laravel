@@ -17,7 +17,6 @@ $(document).ready(function() {
     });
   }
 
-  lazyLoading.init({
-    selector : 'img.lazy'
-  });
+  lazyLoading.init();
+  scrollUp.init();
 });

@@ -1,6 +1,6 @@
 var lazyLoading = (function($) {
   var defaults = {
-      selector:    'img.lazy'
+      selector: 'img.lazy'
   };
 
   return {
@@ -65,6 +65,54 @@ var lazyLoading = (function($) {
       return (
         rect.top >= 0 && rect.left >= 0 && rect.top <= (window.innerHeight || document.documentElement.clientHeight)
       );
+    }
+  };
+})(jQuery);
+
+var scrollUp = (function($) {
+  var defaults = {
+      color: '#008CBA',
+      image: '/themes/basic-template/assets/img/up-arrow.png'
+  };
+
+  return {
+    init: function(data) {
+      data = $.extend(defaults, data);
+      scrollUp.runScroll();
+
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('.scrollup').fadeIn();
+        } else {
+            $('.scrollup').fadeOut();
+        }
+      });
+    },
+
+    runScroll: function() {
+        $("body").append("<a href='javascript:void(0);' class='scrollup'>&nbsp;</a>");
+        $(".scrollup").css({
+            "position":"fixed",
+            "bottom":"25px",
+            "right":"25px",
+            "display":"none",
+            "background-color": defaults.color,
+            "width": "50px",
+            "height": "50px",
+            "background-position": "center center",
+            "background-repeat": "no-repeat",
+            "background-image": "url('"+defaults.image+"')",
+            "opacity": "0.8",
+            "filter": "alpha(opacity = 80)",
+            "-webkit-border-radius": "8px",
+            "-moz-border-radius": "8px",
+            "border-radius": "8px"
+        });
+
+        $("body").on('click', '.scrollup', function () {
+            $("html, body").animate({ scrollTop: 0 }, 'slow');
+            return false;
+        });
     }
   };
 })(jQuery);
