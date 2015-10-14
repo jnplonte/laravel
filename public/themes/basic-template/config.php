@@ -55,44 +55,52 @@ return array(
         // this event should call to assign some assets,
         // breadcrumb template.
         'beforeRenderTheme' => function ($theme) {
-          /*
-           * CSS
-           */
-          $theme->asset()->container('base-css')->add('normalize', 'libraries/foundation/css/normalize.css');
-          $theme->asset()->container('base-css')->add('foundation', 'libraries/foundation/css/foundation.min.css');
-          $theme->asset()->container('base-css')->add('foundation-icons', 'libraries/foundation-icons/foundation-icons.css');
-          $theme->asset()->container('base-css')->add('foundation-datepicker', 'libraries/bower_components/foundation-datepicker/css/foundation-datepicker.min.css');
+          if(env('APP_DEBUG')){
+            $theme->asset()->container('base-css')->add('normalize', 'libraries/foundation/css/normalize.css');
+            $theme->asset()->container('base-css')->add('foundation', 'libraries/foundation/css/foundation.min.css');
+            $theme->asset()->container('base-css')->add('foundation-icons', 'libraries/foundation-icons/foundation-icons.css');
 
-          /*
-           * JS
-           */
-          $theme->asset()->container('base-js')->add('modernizr', 'libraries/foundation/js/vendor/modernizr.js');
-          $theme->asset()->container('base-js')->add('jquery', 'libraries/foundation/js/vendor/jquery.js');
-          $theme->asset()->container('base-js')->add('fastclick', 'libraries/foundation/js/vendor/fastclick.js');
-          $theme->asset()->container('base-js')->add('base-helper', 'libraries/helpers/base-helper.js');
-          $theme->asset()->container('base-js')->add('base-libraries', 'libraries/helpers/base-libraries.js');
-          $theme->asset()->container('base-js')->add('foundation', 'libraries/foundation/js/foundation.min.js');
-          $theme->asset()->container('base-js')->add('foundation-datepicker', 'libraries/bower_components/foundation-datepicker/js/foundation-datepicker.min.js');
+            $theme->asset()->container('base-js')->add('modernizr', 'libraries/foundation/js/vendor/modernizr.js');
+            $theme->asset()->container('base-js')->add('jquery', 'libraries/foundation/js/vendor/jquery.js');
+            $theme->asset()->container('base-js')->add('fastclick', 'libraries/foundation/js/vendor/fastclick.js');
+            $theme->asset()->container('base-js')->add('base-helper', 'libraries/helpers/base-helper.js');
+            $theme->asset()->container('base-js')->add('base-libraries', 'libraries/helpers/base-libraries.js');
+            $theme->asset()->container('base-js')->add('foundation', 'libraries/foundation/js/foundation.min.js');
+          }else{
+            $theme->asset()->container('base-css')->add('base-css', 'assets/base.min.css');
+            $theme->asset()->container('base-js')->add('base-js', 'assets/base.min.js');
+          }
 
-          $actionName = str_replace('@', '', strstr(Route::getCurrentRoute()->getActionName(), '@'));
-          if (in_array($actionName, array('getUsers'))) {
+          $actionName = Route::currentRouteName();
+          if (in_array($actionName, array('users'))) {
               $theme->asset()->add('responsive-tables', 'libraries/responsive-tables/responsive-tables.css');
               $theme->asset()->add('responsive-tables', 'libraries/responsive-tables/responsive-tables.js');
           }
 
-          $theme->asset()->usePath()->add('css', 'css/style.css');
-          $theme->asset()->usePath()->add('js', 'js/script.js');
+          if (in_array($actionName, array('get.profile'))) {
+              $theme->asset()->add('date-picker', 'libraries/bower_components/foundation-datepicker/css/foundation-datepicker.min.css');
+              $theme->asset()->add('date-picker', 'libraries/bower_components/foundation-datepicker/js/foundation-datepicker.min.js');
+          }
+
+          if(env('APP_DEBUG')){
+            $theme->asset()->usePath()->add('css', 'css/style.css');
+            $theme->asset()->usePath()->add('js', 'js/script.js');
+          }else{
+            $theme->asset()->add('css', 'assets/default.min.css');
+            $theme->asset()->add('js', 'assets/default.min.js');
+          }
         },
 
         // Listen on event before render a layout,
         // this should call to assign style, script for a layout.
         'beforeRenderLayout' => array(
             'default' => function ($theme) {
-              $theme->asset()->container('theme-css')->usePath()->add('layout-css', 'css/default/style.css');
-              $theme->asset()->container('theme-js')->usePath()->add('layout-js', 'js/default/script.js');
+              if(env('APP_DEBUG')){
+                $theme->asset()->container('theme-css')->usePath()->add('layout-css', 'css/default/style.css');
+                $theme->asset()->container('theme-js')->usePath()->add('layout-js', 'js/default/script.js');
+              }
             },
         ),
-
     ),
 
 );

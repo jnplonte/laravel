@@ -16,12 +16,27 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.styles([
+        "foundation/css/normalize.css",
+        "foundation/css/foundation.min.css",
+        "foundation-icons/foundation-icons.css"
+    ], 'public/assets/base.min.css', 'public/libraries/');
+
+    mix.scripts([
+        "foundation/js/vendor/modernizr.js",
+        "foundation/js/vendor/jquery.js",
+        "foundation/js/vendor/fastclick.js",
+        "helpers/*.js",
+        "foundation/js/foundation.min.js",
+    ], 'public/assets/base.min.js', 'public/libraries/');
+
+
+    mix.styles([
         "css/*.css",
-        "css/**/*.css"
-    ], 'public/assets/default.css', 'public/themes/basic-template/assets/');
+        "css/default/*.css"
+    ], 'public/assets/default.min.css', 'public/themes/basic-template/assets/');
 
     mix.scripts([
         "js/*.js",
-        "js/**/*.js"
-    ], 'public/assets/default.js', 'public/themes/basic-template/assets/');
+        "js/default/*.js"
+    ], 'public/assets/default.min.js', 'public/themes/basic-template/assets/');
 });
