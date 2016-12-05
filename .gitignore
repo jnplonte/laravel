@@ -1,8 +1,8 @@
-/vendor
 /node_modules
-/bower_components
-/public/libraries/bower_components
-/public/uploads
-/public/assets
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+Homestead.json
 Homestead.yaml
 .env
